@@ -140,6 +140,7 @@ class Adafruit_VS1053 {
   uint16_t recordedReadWord(void);
 
   uint8_t mp3buffer[VS1053_DATABUFFERLEN];
+  long seekPosition = -1;
 
 #ifdef ARDUINO_ARCH_SAMD
 protected:
@@ -173,6 +174,11 @@ class Adafruit_VS1053_FilePlayer : public Adafruit_VS1053 {
   volatile boolean playingMusic;
   void feedBuffer(void);
   boolean startPlayingFile(const char *trackname);
+
+  long fileSize(void);
+  long filePosition(void);
+  void fileSeek(long position);
+
   boolean playFullFile(const char *trackname);
   void stopPlaying(void);
   boolean paused(void);
